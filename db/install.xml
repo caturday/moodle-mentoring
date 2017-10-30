@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/mentoring/db" VERSION="20171029" COMMENT="XMLDB file for Moodle local/mentoring"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="mentoring_category" COMMENT="The mentoring category lookup.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="category_name" TYPE="char" LENGTH="150" NOTNULL="true" SEQUENCE="false" COMMENT="The name of the mentoring category."/>
+        <FIELD NAME="category_desc" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="The category description. Optional."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="category_name_idx" UNIQUE="true" FIELDS="category_name"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="category_user_map" COMMENT="Maps mentoring categories to user, and signifies whether the user will be the mentor or the mentee.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="category_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="FK to the category ID."/>
+        <FIELD NAME="user_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="FK to the Moodle user ID."/>
+        <FIELD NAME="is_mentor" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Flag indicating that the mapped user wishes to be a mentor in this category."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="category_id_fk" TYPE="foreign" FIELDS="category_id" REFTABLE="mentoring_category" REFFIELDS="id"/>
+        <KEY NAME="user_id_fk" TYPE="foreign" FIELDS="user_id" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="mentor_category_pk" TYPE="unique" FIELDS="category_id, user_id"/>
+        <KEY NAME="category_user_map_pk" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="mentor_application_items" COMMENT="Tracks mentor applications.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="question_number" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="question_response" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="application_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="mentor_application" COMMENT="Table for storing metadata about mentoring application submissions.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="user_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="submission_date" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="approved" TYPE="binary" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="configuration" COMMENT="This table contains simple configuration data.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="key" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="value" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="unique_key" UNIQUE="true" FIELDS="key"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

@@ -1,0 +1,77 @@
+.apply-form textarea {
+    width: 400px;
+    height: 75px;
+}
+
+.apply-form .ftextarea {
+    clear: left;
+    margin-left: 20px !important;
+    width: 100%;
+}
+
+.apply-form .fitem_ftextarea .fitemtitle {
+    width: 100% !important;
+}
+
+.apply-form .fitemtitle {
+    text-align: left !important;
+}
+
+.application-display {
+    padding-left: 20px;
+}
+
+.application-question {
+    font-weight: bold;
+}
+
+.application-answer {
+    font-style: italic;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border: 1px solid #D3D3D3;
+    background-color: #F5F5F5;
+    width: 400px;
+}
+
+#fgroup_id_search-categories span {
+    margin-right: 20px;
+}
+
+#fgroup_id_search-categories fieldset {
+    max-width: 500px;
+}
+
+.mentor-display {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border: 1px solid #D3D3D3;
+    width: 400px;
+}
+
+.mentor-display-picture {
+    display: inline-block;
+}
+
+.mentor-display-profile {
+    display: inline-block;
+    padding-left: 10px;
+}
+
+.mentor-display-name {
+    font-weight: bold;
+}
+
+.mentor-display-city {
+    font-style: italic;
+}
+
+.mentor-display-gray {
+    color: gray;
+}
+
+.mentor-display-categories {
+    padding-left: 48px;
+}
