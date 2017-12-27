@@ -22,9 +22,12 @@
         $to_users = array();
 
         $from = $USER->firstname . " " . $USER->lastname;
-
+        $email = $USER->email;
         $body = $fromform->body;
-        $body = "The following support request was submitted by " . $from . ":\n" . $body; 
+        $start = "The following support request was submitted in Masonic Mentoring:";
+
+        $email_text = "${start}\nFrom: ${from}\nEmail: ${email}\n\n${body}";
+        $email_html = "${start}<br />From: ${from}<br />Email: ${email}<br /><br />${body}";
 
         if ($fromform->type == 't') {
             $to_users = get_users_by_capability(context_system::instance(), 'local/mentoring:technical_help');
@@ -36,7 +39,7 @@
 
         foreach ($to_users as $to_user) {
             email_to_user($to_user, get_string('email_from_name', 'local_mentoring'),
-                $subj . $from, $body, '', '', '', true);
+                $subj . $from, $email_text, $email_html, '', '', true);
         }
 
         echo $OUTPUT->header();
