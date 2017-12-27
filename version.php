@@ -22,12 +22,12 @@
  
 defined('MOODLE_INTERNAL') || die();
  
-$plugin->version   = 20171227.7;
+$plugin->version   = 20171227.8;
 $plugin->requires  = 2015110300;
 $plugin->cron      = 0;
 $plugin->component = 'local_mentoring';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v20171227.7';
+$plugin->release   = 'v20171227.8';
  
 $plugin->dependencies = array(
 );

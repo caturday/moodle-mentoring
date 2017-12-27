@@ -39,7 +39,7 @@
 
         foreach ($to_users as $to_user) {
             email_to_user($to_user, get_string('email_from_name', 'local_mentoring'),
-                $subj . $from, $email_text, $email_html, '', '', true);
+                $subj . $from, $email_text, $email_html, '', '', true, $email, $from);
         }
 
         echo $OUTPUT->header();
