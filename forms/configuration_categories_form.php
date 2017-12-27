@@ -1,5 +1,5 @@
 <?php
-    require_once('../moodle/config.php');
+    require_once('../../config.php');
     require_once("$CFG->libdir/formslib.php");
  
     class configuration_categories_form extends moodleform {

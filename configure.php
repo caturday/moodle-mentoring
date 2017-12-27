@@ -1,5 +1,5 @@
 <?php
-    require_once('../moodle/config.php');
+    require_once('../../config.php');
     require_once('forms/configuration_categories_form.php');
  
     require_login(null, true, null);

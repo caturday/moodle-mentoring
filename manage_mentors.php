@@ -1,5 +1,5 @@
 <?php
-    require_once('../moodle/config.php');
+    require_once('../../config.php');
  
     require_login(null, true, null);
     $PAGE->set_context(context_system::instance());
@@ -22,7 +22,7 @@
     $table->data = array();
 
     $approve_url = new moodle_url("/local/mentoring/actions/change_mentor_approval.php");
-    $view_url = new moodle_url("/local/mentoring/view_mentor_application.php");
+    $view_url = new moodle_url("/local/mentoring/view_application.php");
 
     foreach ($mentors as $mentor) {
         $this_approve_url_base = "<a href=\"${approve_url}?appid=" . $mentor->id;

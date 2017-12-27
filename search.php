@@ -1,6 +1,6 @@
 <?php
-    require_once('../moodle/user/profile/lib.php');
-    require_once('../moodle/config.php');
+    require_once("../../config.php");
+    require_once($CFG->dirroot . "/user/profile/lib.php");
     require_once('forms/search_form.php');
 
     require_login(null, true, null);
@@ -17,6 +17,7 @@
 
     $mform = new search_form();
     $cat_pattern = "/^search-cat-\d+$/";
+    $message_url = new moodle_url('/local/mentoring/message.php?type=m&backto=/local/mentoring/search.php');
 ?>
 <h3>What are you looking for?</h3>
 <div class="searchform-container">
@@ -32,7 +33,7 @@
             $selected_cats[] = str_replace("search-cat-", "", $cat_key);
         }
 
-        $mentor_query = "SELECT ma.id, u.firstname, u.lastname, u.email, u.city, u.picture, GROUP_CONCAT(mc.category_name) AS category_list
+        $mentor_query = "SELECT ma.user_id, u.firstname, u.lastname, u.email, u.city, u.picture, GROUP_CONCAT(mc.category_name) AS category_list
             FROM {mentor_application} ma JOIN {user} u ON ma.user_id = u.id
                 JOIN {category_user_map} cu ON u.id = cu.user_id
                 JOIN {mentoring_category} mc ON cu.category_id = mc.id
@@ -57,11 +58,11 @@
 <?php else: ?>
     <?php foreach ($mentors as $mentor): ?>
     <div class="mentor-display">
-        <div class="mentor-display-picture"><?=$OUTPUT->user_picture($mentor)?></div>
         <div class="mentor-display-profile">
             <span class="mentor-display-name"><?=$mentor->firstname?> <?=$mentor->lastname?></span><?php if ($mentor->city != ""): ?>&nbsp;&bull;&nbsp;<span class="mentor-display-city mentor-display-gray"><?=$mentor->city?></span><?php endif; ?>
         </div>
         <div class="mentor-display-categories"><span class="mentor-display-gray">Mentors:</span> <?=str_replace(",", ", ", $mentor->category_list)?></div>
+        <div class="mentor-display-message"><a href="<?=$message_url . "&to=" . $mentor->user_id?>">Message this Mentor</a></div>
     </div>
     <?php endforeach; ?>
 <?php endif; ?>

@@ -1,5 +1,5 @@
 <?php
-    require_once('../moodle/config.php');
+    require_once('../../config.php');
     require_once("$CFG->libdir/formslib.php");
  
     class search_form extends moodleform {
@@ -8,6 +8,7 @@
             global $CFG, $DB;
  
             $mform = $this->_form; // Don't forget the underscore! 
+            $mform->disable_form_change_checker();
  
             $cats = $DB->get_records('mentoring_category', null, 'category_name, category_desc');
 

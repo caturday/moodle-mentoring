@@ -1,6 +1,7 @@
 <?php
-    require_once('../moodle/config.php');
+    require_once('../../config.php');
     require_once("$CFG->libdir/formslib.php");
+    require_once('lib.php');
  
     class apply_form extends moodleform {
         //Add elements to form
@@ -25,14 +26,7 @@
             $mform->setType('q4', PARAM_TEXT);
             $mform->addRule('q4', get_string('form_err_generic_required', 'local_mentoring'), 'required');
 
-            $cats = $DB->get_records('mentoring_category', null, 'category_name, category_desc');
-
-            $mform->addElement('static', 'category_question_text', get_string('apply_lbl_q5', 'local_mentoring'),
-                get_string('form_lbl_all_that_apply', 'local_mentoring'));
-
-            foreach ($cats as $cat) {
-                $mform->addElement('checkbox', 'q5-' . $cat->id, '', $cat->category_name);
-            }
+            add_profile_elements_to_form($mform);
 
             $mform->addElement('submit', 'submit', get_string('apply_lbl_submit', 'local_mentoring'));
         }

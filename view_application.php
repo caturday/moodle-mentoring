@@ -1,10 +1,10 @@
 <?php
-    require_once('../moodle/config.php');
+    require_once('../../config.php');
  
     require_login(null, true, null);
     $PAGE->set_context(context_system::instance());
     
-    $PAGE->set_url('/local/mentoring/view_mentor_application.php');
+    $PAGE->set_url('/local/mentoring/view_application.php');
     $PAGE->set_title(get_string('page_name_view_application', 'local_mentoring'));
     $PAGE->set_heading(get_string('page_name_view_application', 'local_mentoring'));
     $PAGE->set_pagelayout('standard');
@@ -35,19 +35,17 @@
         WHERE user_id = ? AND is_mentor = 1';
     $selectedcats = $DB->get_records_sql($selectedcatsql, array($thisapp->user_id));
 
-    $contact_url = "<a href=\"mailto:" . $thisapp->email . "?subject=Your PA Grand Lodge mentoring application\">email</a>";
-    $approve_url = "<a href=\"" . new moodle_url("/local/mentoring/actions/change_mentor_approval.php") . "?appid=" . $thisapp->id;
+    $contact_url = new moodle_url('/local/mentoring/message.php?type=a&to=' . $thisapp->user_id . '&backto=/local/mentoring/manage_mentors.php');
+    $approve_link = "<a href=\"" . new moodle_url("/local/mentoring/actions/change_mentor_approval.php") . "?appid=" . $thisapp->id;
     $approval_display = '';
 
     if ($thisapp->approved == 0) {
-        $approval_display = "<b>Pending</b>: ${approve_url}&status=1\">approve</a> | ${approve_url}&status=-1\">deny</a>";
+        $approval_display = "<b>Pending</b>: ${approve_link}&status=1\">approve</a> | ${approve_link}&status=-1\">deny</a>";
     } else if ($thisapp->approved == 1) {
-        $approval_display = "<b>Approved</b>: ${approve_url}&status=0\">unapprove</a>";
+        $approval_display = "<b>Approved</b>: ${approve_link}&status=0\">unapprove</a>";
     } else if ($thisapp->approved == -1) {
         $approval_display = "<b>Denied</b>";
     }
-
-    $approval_display .= " | " . $contact_url;
 
     $return_link = new moodle_url("/local/mentoring/manage_mentors.php");
 ?>
@@ -55,7 +53,7 @@
 <h3>Application for <?=$thisapp->firstname?> <?=$thisapp->lastname?></h3>
 <div class="application-display">
     <p><i>Applied on <?=date('j F Y', $thisapp->submission_date)?></i></p>
-    <p>Status is <?=$approval_display?></p>
+    <p>Status is <?=$approval_display?> | <a href="<?=$contact_url?>">message user</a></p>
     <?php for($i = 1; $i < 5; $i++): ?>
     <div class="application-question">
         <?=get_string('apply_lbl_q' . $i, 'local_mentoring')?>
