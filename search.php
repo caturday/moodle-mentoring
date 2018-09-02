@@ -36,7 +36,8 @@
         }
 
         if (count($selected_cats) != 0) {
-            $mentor_query = "SELECT ma.user_id, u.firstname, u.lastname, u.email, u.city, u.picture, GROUP_CONCAT(mc.category_name) AS category_list
+            $mentor_query = "SELECT ma.user_id, u.firstname, u.lastname, u.email, u.city, u.picture,
+                    GROUP_CONCAT(mc.category_name ORDER BY mc.category_name) AS category_list
                 FROM {mentor_application} ma JOIN {user} u ON ma.user_id = u.id
                     JOIN {category_user_map} cu ON u.id = cu.user_id
                     JOIN {mentoring_category} mc ON cu.category_id = mc.id
@@ -51,7 +52,8 @@
             }
 
             $mentor_query .= ")
-                GROUP BY ma.id, u.firstname, u.lastname, u.email";
+                GROUP BY ma.id, u.firstname, u.lastname, u.email
+                ORDER BY u.lastname, u.firstname";
 
             $mentors = $DB->get_records_sql($mentor_query, $selected_cats);
 
@@ -62,9 +64,9 @@
     <div class="mentor-display-none">No matches found. Try modifying your search.</div>
 <?php else: ?>
     <?php foreach ($mentors as $mentor):
-        $mentor_user = get_complete_user_data('id', $USER->id);
+        $mentor_user = get_complete_user_data('id', $mentor->user_id);
         $mentor_loc = construct_user_location($mentor_user);
-        $mentor_link = new moodle_url("/user/profile.php?id=" . $USER->id);
+        $mentor_link = new moodle_url("/user/profile.php?id=" . $mentor->user_id);
     ?>
     <div class="mentor-display">
         <div class="mentor-display-image">

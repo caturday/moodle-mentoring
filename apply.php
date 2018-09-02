@@ -2,6 +2,7 @@
     require_once('../../config.php');
     require_once($CFG->libdir . '/accesslib.php');
     require_once('forms/apply_form.php');
+    require_once($CFG->dirroot . '/user/profile/lib.php');
  
     require_login(null, true, null);
     $PAGE->set_context(context_system::instance());
