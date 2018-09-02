@@ -1,0 +1,9 @@
+Hello!
+
+Your mentoring status in the Online Masonic Mentoring System has changed.
+
+Your new status is: %STATUS%.
+
+If you believe this is in error, please contact us: %URL_MENTORING_HELP%
+
+Thank you for your interest in mentoring your Masonic brethren!

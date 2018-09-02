@@ -18,7 +18,7 @@
 
             // $mform->addElement('static', 'subj', get_string('help_lbl_subject', 'local_mentoring'));
             // $mform->addElement('hidden', 'type_h', null);
-            $mform->addElement('textarea', 'body', get_string('help_lbl_message', 'local_mentoring'));
+            $mform->addElement('textarea', 'body', get_string('help_lbl_message', 'local_mentoring'), 'rows="10"');
             $mform->addElement('submit', 'submit', get_string('help_lbl_submit', 'local_mentoring'));
         }
 

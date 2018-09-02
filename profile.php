@@ -24,6 +24,17 @@
         $keys = array_keys(get_object_vars($fromform));
         $multi_keys = preg_grep($multi_pattern, $keys);
 
+        // update user profile information
+        $user = new object();
+        $user->id = $USER->id;
+        $user->email = $fromform->email;
+        $user->phone1 = $fromform->phone;
+        $user->city = $fromform->city;
+        $user->profile_field_State = $fromform->state;
+        $user->institution = $fromform->lodge;
+        profile_save_data($user);
+        $DB->update_record('user', $user);
+
         $DB->delete_records_select('category_user_map', 'user_id=' . $USER->id);
         foreach($multi_keys as $key) {
             $catmap = new stdClass();
@@ -44,7 +55,15 @@
             $form_data['q5-' . $old_cat->category_id] = 'checked';
         }
 
-        $mform = new profile_form();
+        // pull phone/state/city information from profile
+        $app_user = get_complete_user_data('id', $USER->id);
+        $form_data['email'] = $app_user->email;
+        $form_data['phone'] = $app_user->phone1;
+        $form_data['city'] = $app_user->city;
+        $form_data['state'] = $app_user->profile['State'];
+        $form_data['lodge'] = $app_user->institution;
+
+        //$mform = new profile_form();
         $mform->set_data($form_data);
     }
 

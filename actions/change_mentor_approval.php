@@ -37,9 +37,14 @@
 
     $email_text = get_string('email_application_status_text', 'local_mentoring');
     $email_text = str_replace('%STATUS%', $status_text, $email_text);
+    $email_text = str_replace('%URL_MENTORING_HELP%', new moodle_url('/local/mentoring/help.php'), $email_text);
+
+    $email_html = get_string('email_application_status_html', 'local_mentoring');
+    $email_html = str_replace('%STATUS%', $status_text, $email_html);
+    $email_html = str_replace('%URL_MENTORING_HELP%', new moodle_url('/local/mentoring/help.php'), $email_html);
 
     email_to_user($user, get_string('email_from_name', 'local_mentoring'), 
-        get_string('email_application_status_subject', 'local_mentoring'), $email_text, '', '', '', true);
+        get_string('email_application_status_subject', 'local_mentoring'), $email_text, $email_html, '', '', true);
 
     redirect(new moodle_url('/local/mentoring/manage_mentors.php', null));
 ?>

@@ -1,0 +1,7 @@
+Hello!
+
+Your mentoring application has been received. Thank you for your interest in mentoring your Masonic brethren!
+
+Once your application is reviewed, you will receive another email. If you have not received an email within the next week, please contact us: %URL_MENTORING_HELP%
+
+Thanks again!

@@ -1,0 +1,5 @@
+Hello!
+
+A new mentoring application has been received from %MENTOR_NAME%.
+
+Please review it at your earliest convenience. You can access it here: %URL_MANAGE_MENTORS%

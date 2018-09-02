@@ -18,6 +18,7 @@
     $string['page_name_resources'] = 'Mentoring Resources';
     $string['page_name_add_mentor'] = 'Add Mentor';
     $string['page_name_help'] = 'Help!';
+    $string['page_name_viewlog'] = 'View Message Logs';
 
     $string['link_container_name'] = 'Online Masonic Mentoring';
 
@@ -34,6 +35,12 @@
     $string['cfg_lbl_catdesc'] = 'Description';
     $string['cfg_lbl_categories_submit'] = 'Add';
 
+    $string['apply_lbl_verify_profile'] = 'Please verify the following information from your user profile. It will help potential mentees find and get in touch with you. You can edit it any time on the <a href="' . new moodle_url("/user/editadvanced.php") . '">Profile</a> page.';
+    $string['apply_lbl_email'] = 'Email Address';
+    $string['apply_lbl_phone'] = 'Preferred Phone Number';
+    $string['apply_lbl_city'] = 'City';
+    $string['apply_lbl_state'] = 'State';
+    $string['apply_lbl_lodge'] = 'Lodge';
     $string['apply_lbl_q1'] = 'Do you have any constraints on your ability to mentor (time or otherwise)? If so, please describe.';  
     $string['apply_lbl_q2'] = 'Please describe any success you\'ve had as a PA Masonic Mentor.';
     $string['apply_lbl_q3'] = 'Please comment on your experience(s) using email, social media (e.g. Facebook), and websites.';
@@ -59,6 +66,7 @@
     $string['add_lbl_submit'] = 'Add Mentor';
 
     $string['form_err_generic_required'] = 'This field is required.';
+    $string['form_err_email_invalid'] = 'Email address invalid.';
     $string['form_lbl_all_that_apply'] = 'Please select all that apply.';
 
     $string['mentoring:admin'] = 'Administer Mentoring System';
@@ -66,7 +74,6 @@
     $string['mentoring:mentoring_help'] = 'Provide Mentoring Help';
     $string['mentoring:technical_help'] = 'Provide Mentoring Technical Help';
 
-    $string['email_mentoring_admin'] = 'zack.panitzke@symmetricity.net';
     $string['email_from_name'] = 'Online Masonic Mentoring';
 
     $string['email_application_status_approved'] = 'APPROVED';
@@ -74,30 +81,23 @@
     $string['email_application_status_unreviewed'] = 'UNREVIEWED';
 
     $string['email_application_status_subject'] = 'Your Mentoring status has changed!';
-    $string['email_application_status_text'] = 'Hello!
-
-Your mentoring status in the Online Masonic Mentoring System has changed.
-
-Your new status is: %STATUS%.
-
-If you believe this is in error, please contact us at ' . $string['email_mentoring_admin'] . '.
-
-Thank you for your interest in mentoring your Masonic brethren!';
+    $string['email_application_status_text'] = file_get_contents($CFG->dirroot . '/local/mentoring/lang/en/email_application_status.txt');
+    $string['email_application_status_html'] = file_get_contents($CFG->dirroot . '/local/mentoring/lang/en/email_application_status.html');
 
     $string['email_application_received_user_subject'] = 'Your Mentoring application has been received!';
-    $string['email_application_received_user_text'] = 'Hello!
-
-Your mentoring application has been received. Thank you for your interest in mentoring your Masonic brethren!
-
-Once your application is reviewed, you will receive another email. If you have not received an email within the next week, please contact us at ' . $string['email_mentoring_admin'] . '.
-
-Thanks again!';
+    $string['email_application_received_user_text'] = file_get_contents($CFG->dirroot . '/local/mentoring/lang/en/email_application_received_user.txt');
+    $string['email_application_received_user_html'] = file_get_contents($CFG->dirroot . '/local/mentoring/lang/en/email_application_received_user.html');
 
     $string['email_application_received_subject'] = 'Mentoring application received';
-    $string['email_application_received_text'] = 'Hello!
+    $string['email_application_received_text'] = file_get_contents($CFG->dirroot . '/local/mentoring/lang/en/email_application_received_admin.txt');
+    $string['email_application_received_html'] = file_get_contents($CFG->dirroot . '/local/mentoring/lang/en/email_application_received_admin.html');
 
-A new mentoring application has been received. Please review it at your earliest convenience. You can access it here: ' . 
-new moodle_url('/local/mentoring/manage_mentors.php');
+    $string['email_message_help_subject'] = 'Mentoring Help';
+    $string['email_message_techsupport_subject'] = 'Mentoring Technical Support';
+    $string['email_message_request_subject'] = 'Request for Mentoring';
+    $string['email_message_application_subject'] = 'Your Mentoring Application';
+    $string['email_message_text'] = file_get_contents($CFG->dirroot . '/local/mentoring/lang/en/email_message.txt');
+    $string['email_message_html'] = file_get_contents($CFG->dirroot . '/local/mentoring/lang/en/email_message.html');
 
     $string['help_lbl_technical'] = 'Technical Support';
     $string['help_lbl_mentoring'] = 'Mentoring Support';

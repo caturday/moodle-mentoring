@@ -20,6 +20,8 @@
         WHERE ma.id = ?';
     $thisapp = $DB->get_record_sql($appsql, array($app_id));
 
+    $app_user = get_complete_user_data('id', $thisapp->user_id);
+
     $qsql = 'SELECT question_number, question_response
         FROM {mentor_application_items}
         WHERE application_id = ?';
@@ -52,6 +54,19 @@
 <a href="<?=$return_link?>">&larr; return to list</a>
 <h3>Application for <?=$thisapp->firstname?> <?=$thisapp->lastname?></h3>
 <div class="application-display">
+    <div class="mentor-display">
+        <div class="mentor-display-image">
+            <?=$OUTPUT->user_picture($app_user, array('size'=>70))?>
+        </div>
+        <p style="font-style: italic; display: inline-block; margin-left: 1em; margin-bottom: 0;">
+            <a href="mailto:<?=$app_user->email?>"><?=$app_user->email?></a> |
+            <?php if ($app_user->phone1 !== ''): ?><?=$app_user->phone1?> |<?php endif; ?>
+            <?php if ($app_user->phone2 !== ''): ?><?=$app_user->phone2?> |<?php endif; ?>
+            <?=construct_user_location($app_user)?>
+            <br />PA Grand Lodge ID #<?=$app_user->idnumber?>
+            <br /><?php if ($app_user->institution !== ''): ?><?=$app_user->institution?><?php endif; ?>
+        </p>
+    </div>
     <p><i>Applied on <?=date('j F Y', $thisapp->submission_date)?></i></p>
     <p>Status is <?=$approval_display?> | <a href="<?=$contact_url?>">message user</a></p>
     <?php for($i = 1; $i < 5; $i++): ?>

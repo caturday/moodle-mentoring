@@ -2,6 +2,7 @@
     require_once('../../config.php');
     require_once("$CFG->libdir/formslib.php");
     require_once('lib.php');
+    require_once('state_dropdown.php');
  
     class apply_form extends moodleform {
         //Add elements to form
@@ -9,7 +10,9 @@
             global $CFG, $DB;
  
             $mform = $this->_form; // Don't forget the underscore! 
- 
+
+            add_contact_info_elements_to_form($mform);
+
             $mform->addElement('textarea', 'q1', get_string('apply_lbl_q1', 'local_mentoring'), 'class="custom-question"');
             $mform->setType('q1', PARAM_TEXT);
             $mform->addRule('q1', get_string('form_err_generic_required', 'local_mentoring'), 'required');

@@ -1,0 +1,9 @@
+Dear %TO_USER_NAME%,
+
+You have received a Masonic Mentoring message from %FROM_USER_NAME%. The message is as follows:
+
+%MESSAGE_TEXT%
+
+You can contact %FROM_USER_NAME% at
+%FROM_USER_EMAIL%
+%FROM_USER_PHONE%

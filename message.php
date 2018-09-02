@@ -51,6 +51,7 @@
         echo $OUTPUT->header();
 ?>
 <h3>Compose Message</h3>
+<div class="message-form">
 <?php
         $to_user = $DB->get_record('user', array('id' => $to));
 
@@ -61,16 +62,16 @@
 
             switch ($type) {
                 case 'a':
-                    $formdata->subj = 'Your Mentoring Application';
+                    $formdata->subj = get_string('email_message_application_subject', 'local_mentoring');
                     break;
                 case 'm':
-                    $formdata->subj = 'Request for Mentoring';
+                    $formdata->subj = get_string('email_message_request_subject', 'local_mentoring');
                     break;
                 case 't':
-                    $formdata->subj = 'Mentoring Technical Support';
+                    $formdata->subj = get_string('email_message_techsupport_subject', 'local_mentoring');
                     break;
                 case 'h':
-                    $formdata->subj = 'Mentoring Help';
+                    $formdata->subj = get_string('email_message_help_subject', 'local_mentoring');
                     break;
             }
 
@@ -88,6 +89,9 @@
             $mform->set_data($formdata);
             $mform->display();
         }
+?>
+</div>
+<?php
     } else {
         // redirect, because the user has done something bad...
         echo "Invalid option.";

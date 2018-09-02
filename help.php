@@ -17,6 +17,7 @@
     // $type = array_key_exists('type', $_GET) ? $_GET['type'] : 'm';
 
     $mform = new help_form();
+    echo $OUTPUT->header();
 
     if ($fromform = $mform->get_data()) {
         $to_users = array();
@@ -41,16 +42,14 @@
             email_to_user($to_user, get_string('email_from_name', 'local_mentoring'),
                 $subj . $from, $email_text, $email_html, '', '', true, $email, $from);
         }
-
-        echo $OUTPUT->header();
 ?>
 <h3>Message Sent</h3>
 <p>Your message has been sent. The Online Masonic Mentoring team will reply to you soon!</p>
 <?php
     } else {
-        echo $OUTPUT->header();
 ?>
 <h3>Contact the Online Masonic Mentoring Team for Help</h3>
+<div class="help-form">
 <?php
         $formdata = new stdClass();
 
@@ -67,6 +66,9 @@
 
         $mform->set_data($formdata);
         $mform->display();
+?>
+</div>
+<?php
     }
 
     echo $OUTPUT->footer();

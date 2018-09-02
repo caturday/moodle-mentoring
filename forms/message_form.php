@@ -20,7 +20,7 @@
             $mform->addElement('static', 'from', get_string('message_lbl_sender', 'local_mentoring'));
             $mform->addElement('static', 'subj', get_string('message_lbl_subject', 'local_mentoring'));
 
-            $mform->addElement('textarea', 'body', get_string('message_lbl_message', 'local_mentoring'));
+            $mform->addElement('textarea', 'body', get_string('message_lbl_message', 'local_mentoring'), 'rows="10"');
             $mform->addElement('submit', 'submit', get_string('message_lbl_submit', 'local_mentoring'));
         }
 

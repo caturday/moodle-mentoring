@@ -11,9 +11,17 @@
             $mform->disable_form_change_checker();
  
             $cats = $DB->get_records('mentoring_category', null, 'category_name, category_desc');
+            $len = count($cats);
+
+            $firsthalf = array_slice($cats, 0, ceil($len / 2));
+            $secondhalf = array_slice($cats, ceil($len / 2));
+
+            $reordered_cats = array_zip_merge($firsthalf, $secondhalf);
 
             $catarray = array();
-            foreach ($cats as $cat) {
+            $cat_count = 0;
+
+            foreach ($reordered_cats as $cat) {
                 $catarray[] = $mform->createElement('checkbox', 'search-cat-' . $cat->id, '', $cat->category_name);
             }
 

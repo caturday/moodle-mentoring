@@ -15,19 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
  
 /**
- * @package   plugintype_pluginname
- * @copyright 20.5, You Name <your@email.address>
+ * @package   local_mentoring
+ * @copyright 2018, Zack <contact@symmetricity.net>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
  
 defined('MOODLE_INTERNAL') || die();
  
-$plugin->version   = 20171227.8;
+$plugin->version   = 20180901.1;
 $plugin->requires  = 2015110300;
 $plugin->cron      = 0;
 $plugin->component = 'local_mentoring';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v20171227.8';
+$plugin->release   = 'v20180901.1';
  
 $plugin->dependencies = array(
 );

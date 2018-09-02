@@ -33,6 +33,17 @@
         $app->submission_date = time();
         $app->approved = 0;
 
+        // update user profile information
+        $user = new object();
+        $user->id = $USER->id;
+        $user->email = $fromform->email;
+        $user->phone1 = $fromform->phone;
+        $user->city = $fromform->city;
+        $user->institution = $fromform->lodge;
+        $user->profile_field_State = $fromform->state;
+        profile_save_data($user);
+        $DB->update_record('user', $user);
+
         // if we're working with an existing application, overwrite.
         if (isset($old_app->id)) {
             $app->id = $old_app->id;
@@ -65,23 +76,36 @@
 
         $mentor_managers = get_users_by_capability(context_system::instance(), 'local/mentoring:manage_mentors');
         foreach ($mentor_managers as $mgr) {
+            $email_text = get_string('email_application_received_text', 'local_mentoring');
+            $email_text = str_replace('%URL_MANAGE_MENTORS%', new moodle_url('/local/mentoring/manage_mentors.php'), $email_text);
+            $email_text = str_replace('%MENTOR_NAME%', $USER->firstname . " " . $USER->lastname, $email_text);
+
+            $email_html = get_string('email_application_received_html', 'local_mentoring');
+            $email_html = str_replace('%URL_MANAGE_MENTORS%', new moodle_url('/local/mentoring/manage_mentors.php'), $email_html);
+            $email_html = str_replace('%MENTOR_NAME%', $USER->firstname . " " . $USER->lastname, $email_html);
+
             email_to_user($mgr, get_string('email_from_name', 'local_mentoring'),
                 get_string('email_application_received_subject', 'local_mentoring'), 
-                get_string('email_application_received_text', 'local_mentoring'), '', '', '', true);
+                $email_text, $email_html, '', '', true);
         }
+
+        $email_text = get_string('email_application_received_user_text', 'local_mentoring');
+        $email_text = str_replace('%URL_MENTORING_HELP%', new moodle_url('/local/mentoring/help.php'), $email_text);
+
+        $email_html = get_string('email_application_received_user_html', 'local_mentoring');
+        $email_html = str_replace('%URL_MENTORING_HELP%', new moodle_url('/local/mentoring/help.php'), $email_html);
 
         email_to_user($USER, get_string('email_from_name', 'local_mentoring'),
             get_string('email_application_received_user_subject', 'local_mentoring'), 
-            get_string('email_application_received_user_text', 'local_mentoring'), '', '', '', true);
+            $email_text, $email_html, '', '', true);
 
         $content = "<div class=\"isa_success\">Your mentoring application was received! The mentoring administrator will review it and you'll receive a status update at a later date.
             <br />Thank you for your interest!</div>";
     } else {
         $old_app_note = '';
+        $form_data = array();
 
         if (isset($old_app->id)) {
-            $form_data = array();
-
             $old_app_questions = $DB->get_records_sql('SELECT aq.id, aq.question_number, aq.question_response
                 FROM {mentor_application_items} aq WHERE aq.application_id = ' . $old_app->id);
 
@@ -98,9 +122,6 @@
                 $form_data['q5-' . $old_cat->category_id] = 'checked';
             }
 
-            $mform = new apply_form();
-            $mform->set_data($form_data);
-
             // then construct a note indicating a past submitted response.
             $old_app_note = "<div class=\"isa_info\"><div style=\"font-size: 1.5em; font-weight: bold; padding-bottom: 0.1em; \">Application Status: ";
             if ($old_app->approved == 1) { $old_app_note .= "Approved"; }
@@ -115,6 +136,16 @@
 
             $old_app_note .= "</div>";
         }
+
+        // either way, pull phone/state/city information from profile/
+        $app_user = get_complete_user_data('id', $USER->id);
+        $form_data['email'] = $app_user->email;
+        $form_data['phone'] = $app_user->phone1;
+        $form_data['city'] = $app_user->city;
+        $form_data['state'] = $app_user->profile['State'];
+        $form_data['lodge'] = $app_user->institution;
+
+        $mform->set_data($form_data);
 
         $content = $old_app_note . "<div class=\"apply-form\">" . $mform->render() . "</div>";
     }
