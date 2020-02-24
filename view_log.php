@@ -16,7 +16,7 @@
 
     global $DB;
 
-    $traffic = $DB->get_recordset_sql("SELECT     mc.id, mc.timecreated, max(m.timecreated) as last_updated, mcm.userid, count(m.id) full_count, u.firstname, u.lastname, u.email
+    $traffic = $DB->get_recordset_sql("SELECT     mc.id, min(m.timecreated) as timecreated, max(m.timecreated) as last_updated, mcm.userid, count(m.id) full_count, u.firstname, u.lastname, u.email
                                          FROM     (
                                                       SELECT DISTINCT m.conversationid
                                                       FROM {messages} m
