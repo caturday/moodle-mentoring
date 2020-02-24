@@ -10,7 +10,7 @@
     $PAGE->set_heading(get_string('page_name_viewlog', 'local_mentoring'));
     $PAGE->set_pagelayout('standard');
 
-    $jquery_url = new moodle_url("/local/mentoring/js/jquery-3.3.1.min.js");
+    $jquery_url = new moodle_url("/local/mentoring/js/jquery-3.4.1.min.js");
     $moment_url = new moodle_url("/local/mentoring/js/moment.min.js");
     $detail_url = new moodle_url("/local/mentoring/actions/get_detailed_log_new.php");
 
