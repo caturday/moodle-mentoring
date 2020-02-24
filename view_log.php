@@ -12,7 +12,7 @@
 
     $jquery_url = new moodle_url("/local/mentoring/js/jquery-3.4.1.min.js");
     $moment_url = new moodle_url("/local/mentoring/js/moment.min.js");
-    $detail_url = new moodle_url("/local/mentoring/actions/get_detailed_log_new.php");
+    $detail_url = new moodle_url("/local/mentoring/actions/get_detailed_log.php");
 
     global $DB;
 

@@ -13,8 +13,7 @@
                                                   mdl_message_conversations mc ON m.conversationid = mc.id JOIN
                                                   mdl_user u ON m.useridfrom = u.id LEFT JOIN
                                                   mdl_message_user_actions mua ON m.id = mua.messageid
-                                         WHERE    mc.type = 1 and m.customdata = '\"mentoringrequest\"'
-                                                  AND m.conversationid = ?
+                                         WHERE    mc.type = 1 AND m.conversationid = ?
                                         ORDER BY  m.timecreated DESC", array($id));
 
     $output = "[";
