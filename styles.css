@@ -17,8 +17,13 @@
     text-align: left !important;
 }
 
+.form-check {
+    min-width: 215px;
+    justify-content: left !important;
+}
+
 .message-form textarea, .help-form textarea {
-    width: 60%;
+    width: 100% !important;
 }
 
 .message-form .form-item, .message-form .felement, .message-form .form-title {

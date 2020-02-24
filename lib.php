@@ -26,7 +26,8 @@
 
         // Only let users with the appropriate capability see this settings item.
         if (!has_capability('local/mentoring:admin', context_system::instance()) &&
-                !has_capability('local/mentoring:manage_mentors', context_system::instance())) {
+                !has_capability('local/mentoring:manage_mentors', context_system::instance()) &&
+                !has_capability('local/mentoring:audit_mentors', context_system::instance())) {
             return;
         }
 
@@ -39,6 +40,9 @@
         if (has_capability('local/mentoring:manage_mentors', context_system::instance())) {
             $manageroot->add(get_string('page_name_manage_mentors', 'local_mentoring'), new moodle_url('/local/mentoring/manage_mentors.php'));
             $manageroot->add(get_string('page_name_add_mentor', 'local_mentoring'), new moodle_url('/local/mentoring/add_mentor.php'));
+        }
+
+        if (has_capability('local/mentoring:audit_mentors', context_system::instance())) {
             $manageroot->add(get_string('page_name_viewlog', 'local_mentoring'), new moodle_url('/local/mentoring/view_log.php'));
         }
     }
@@ -92,7 +96,7 @@
 
     function construct_user_location($user) {
         $loc = $user->city != "" ? $user->city : "";
-        $loc = $user->profile['State'] != "" ?
+        $loc = array_key_exists('State', $user->profile) && $user->profile['State'] != "" ?
             ($loc != "" ? $loc . ", " . $user->profile['State'] : $user->profile['State']) : $loc;
 
         return $loc;

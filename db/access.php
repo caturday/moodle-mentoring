@@ -8,6 +8,14 @@
                 'manager'   => CAP_ALLOW
             )
         ),
+        'local/mentoring:audit_mentors' => array(
+            'riskbitmask'   => RISK_CONFIG,
+            'captype'       => 'write',
+            'contextlevel'  =>  CONTEXT_SYSTEM,
+            'archetypes'    =>  array(
+                'manager'   =>  CAP_ALLOW
+            )
+        ),
         'local/mentoring:manage_mentors' => array(
             'riskbitmask'   => RISK_CONFIG,
             'captype'       => 'write',

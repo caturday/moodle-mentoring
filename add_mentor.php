@@ -42,6 +42,17 @@
             $DB->insert_record("category_user_map", $catmap);
         }
 
+        // This is where you increment the question count if you add questions to the
+        // application form. See forms/apply_form.php for more info.
+        for ($i = 1; $i <= 4; $i++) {
+            $appq = new stdClass();
+            $appq->question_number = $i;
+            $appq->question_response = "Mentor manually added by administrator.";
+            $appq->application_id = $app->id;
+
+            $DB->insert_record('mentor_application_items', $appq);
+        }
+
         $mform->set_data(array());
 
         echo "<div class=\"isa_success\">Mentor added successfully!</div>";

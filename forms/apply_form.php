@@ -13,6 +13,11 @@
 
             add_contact_info_elements_to_form($mform);
 
+            // If you change this form, you MUST also modify add_mentor.php to include 
+            // blank inserts for each of the form fields here. In other words, for each of
+            // q1 to qN, you must also cause that script to insert a blank value for
+            // each of question_number 1 to N.
+
             $mform->addElement('textarea', 'q1', get_string('apply_lbl_q1', 'local_mentoring'), 'class="custom-question"');
             $mform->setType('q1', PARAM_TEXT);
             $mform->addRule('q1', get_string('form_err_generic_required', 'local_mentoring'), 'required');

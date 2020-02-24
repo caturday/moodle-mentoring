@@ -16,18 +16,18 @@
  
 /**
  * @package   local_mentoring
- * @copyright 2018, Zack <contact@symmetricity.net>
+ * @copyright 2020, Zack <contact@symmetricity.net>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
  
 defined('MOODLE_INTERNAL') || die();
  
-$plugin->version   = 20180901.3;
-$plugin->requires  = 2015110300;
+$plugin->version   = 20200223.1;
+$plugin->requires  = 2019052000;
 $plugin->cron      = 0;
 $plugin->component = 'local_mentoring';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v20180901.3';
+$plugin->release   = 'v' . $plugin->version;
  
 $plugin->dependencies = array(
 );

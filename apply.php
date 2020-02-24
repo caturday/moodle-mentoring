@@ -35,7 +35,7 @@
         $app->approved = 0;
 
         // update user profile information
-        $user = new object();
+        $user = new stdClass();
         $user->id = $USER->id;
         $user->email = $fromform->email;
         $user->phone1 = $fromform->phone;

@@ -16,7 +16,6 @@
     $added_category = false;
 
     if ($fromform = $mform->get_data()) {
-        error_log('here');
         $newcat = new stdClass();
         $newcat->category_name = $fromform->category;
         $newcat->category_desc = $fromform->cat_desc;

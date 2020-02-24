@@ -29,11 +29,16 @@
         $message = new \core\message\message();
         $message->component = 'moodle';
         $message->name = 'instantmessage';
+        $message->courseid = -1;
         $message->userfrom = $USER;
         $message->userto = $to_user;
         $message->subject = $fromform->subj_h;
         $message->fullmessage = $fromform->body;
+        $message->fullmessageformat = FORMAT_MARKDOWN;
+        $message->fullmessagehtml = '<p>' . $fromform->body . '</p>';
+        // $message->smallmessage = 'You have a new Mentoring message!';
         $message->notification = '0';
+        $message->customdata = "mentoringrequest";
 
         $messageid = message_send($message);
 

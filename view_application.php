@@ -20,6 +20,11 @@
         WHERE ma.id = ?';
     $thisapp = $DB->get_record_sql($appsql, array($app_id));
 
+    if (!$thisapp) {
+        redirect(new moodle_url('/local/mentoring/manage_mentors.php', null));
+        exit();
+    }
+
     $app_user = get_complete_user_data('id', $thisapp->user_id);
 
     $qsql = 'SELECT question_number, question_response

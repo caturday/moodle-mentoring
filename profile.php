@@ -25,7 +25,7 @@
         $multi_keys = preg_grep($multi_pattern, $keys);
 
         // update user profile information
-        $user = new object();
+        $user = new stdClass();
         $user->id = $USER->id;
         $user->email = $fromform->email;
         $user->phone1 = $fromform->phone;
@@ -60,7 +60,7 @@
         $form_data['email'] = $app_user->email;
         $form_data['phone'] = $app_user->phone1;
         $form_data['city'] = $app_user->city;
-        $form_data['state'] = $app_user->profile['State'];
+        $form_data['state'] = array_key_exists('State', $app_user->profile) ? $app_user->profile['State'] : '';
         $form_data['lodge'] = $app_user->institution;
 
         //$mform = new profile_form();

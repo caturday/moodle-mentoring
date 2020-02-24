@@ -73,6 +73,7 @@
     $string['mentoring:manage_mentors'] = 'Manage Mentor Applications';
     $string['mentoring:mentoring_help'] = 'Provide Mentoring Help';
     $string['mentoring:technical_help'] = 'Provide Mentoring Technical Help';
+    $string['mentoring:audit_mentors'] = 'Audit Mentors';
 
     $string['email_from_name'] = 'Online Masonic Mentoring';
 
